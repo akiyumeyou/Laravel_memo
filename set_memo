@@ -1,0 +1,51 @@
+# 新しいプロジェクトの作成
+curl -s https://laravel.build/example-app | bash
+cd example-app
+
+# 既存プロジェクトに Sail をインストール
+composer require laravel/sail --dev
+
+# Sail をインストール
+php artisan sail:install
+
+# Docker コンテナの起動
+./vendor/bin/sail up
+
+# Breeze をインストール
+./vendor/bin/sail composer require laravel/breeze --dev
+./vendor/bin/sail artisan breeze:install
+
+# フロントエンドの依存関係をインストール
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run dev
+
+# データベースのマイグレーションを実行
+./vendor/bin/sail artisan migrate
+
+# 確認 ユーザーコントローラー
+sail artisan make:controller UserController -r --model=User
+
+6. HTML/CSS/JSをビルド（構築👉フロントで修正があるたびにビルド）
+npm run build
+7．テーブル作成
+php artisan migrate
+ログイン機能・画面が作成されました、画面で確認！。
+
+3．Login画面とRegister画面にリンクを追加( 2ファイル修正)
+/resources/views/auth/register.blade.php
+/resources/views/auth/login.blade.php
+<x-guest-layout>の次「2行目」に以下を貼り付け ...
+<!-- 以下を追加 -->
+@if (Route::has('login'))
+    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+        @auth
+            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+        @else
+            <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+
+            @if (Route::has('register'))
+                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+            @endif
+        @endauth
+    </div>
+@endif
