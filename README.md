@@ -64,7 +64,7 @@ npm run build
 7．テーブル作成
 
 # テーブル作成
-php artisan migrate
+sail artisan migrate
 ログイン機能・画面が作成されました、画面で確認！。
 
 基本ログイン機能・画面が作成されました、画面で確認！。
