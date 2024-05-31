@@ -1,0 +1,13 @@
+コマンド
+
+sail php artisan config:cache
+sail php artisan cache:clear
+sail php artisan config:clear
+sail php artisan route:clear
+sail php artisan view:clear
+
+sail php artisan storage:link
+
+composer install
+
+
